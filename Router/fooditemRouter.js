@@ -19,12 +19,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const { addItem, updateFooditem } = require("../Controller/foodItemController");
+const { addItem, updateFooditem, deleteFooditem } = require("../Controller/foodItemController");
 const { admingAuth } = require("../Controller/Auth");
 
 
 router.post( "/additem",admingAuth,upload.single("image"),addItem);
 router.put( "/update",admingAuth,updateFooditem);
+router.put( "/delete",admingAuth,deleteFooditem);
+
 
 
 module.exports = router;
