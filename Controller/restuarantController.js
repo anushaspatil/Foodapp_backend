@@ -1,4 +1,4 @@
-const User = require("../Model/resturantModel");
+const User = require("../models/resturantModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const secret = "my_food";
@@ -24,26 +24,23 @@ const SignupRestuarant = async(req,res) => {
   }
 }
 
-////////// Restuarant Login //////////// 
-// const LoginRestuarant = async(req,res) => {
-//   try {
-//     const user = await User.findOne({email : req.body.email});
-//     console.log(user)
-//     if(user){
-//       const passMatch = await bcrypt.compare(password, user.password);
-//       console.log(passMatch);
-//       if(passMatch){
-//         const token = jwt.sign({restaurantName, password}, secret)
-//         console.log(token);
-        
-//       }
-//     }
-//   } catch (error) {
-    
-//   }
-// }
+////////// Restuarant Update //////////// 
+const updateRestuarant = async(req,res)=>{
+  try {
+    let restuarant = await User.findOne({restaurantName : req.body.restaurantName});
+    if(restuarant){
+      const compareNumber = await User.find({restuarantAddress : restuarant.restuarantAddress});
+      restuarant = await User.findOneAndUpdate({restuarant : req.body.restuarant}, { restuarantAddress : req.body.newrestuarantAddress })
+      await restuarant.save()
+      res.send("Updated Restuarant information successfully");
+    }
+  } catch (err) {
+    res.send(err);
+    console.log(err)
+  }
+}
 
-module.exports = { SignupRestuarant }
+module.exports = { SignupRestuarant, updateRestuarant }
 
 
 

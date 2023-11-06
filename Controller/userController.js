@@ -1,4 +1,4 @@
-const User = require("../Model/userModel");
+const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const secret = "My_Food_App";
 const jwt = require("jsonwebtoken");

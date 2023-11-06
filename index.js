@@ -10,8 +10,9 @@ app.use(cors());
 const DBname =  "Healthy_Meals";
 const URLdb = "mongodb://127.0.0.1:27017/" + DBname;
 
-mongoose.connect(URLdb, {useNewUrlParser : true ,
-   useUnifiedTopology : true}).then(()=>{
+mongoose.connect(URLdb, 
+  // {useNewUrlParser : true ,useUnifiedTopology : true}
+  ).then(()=>{
     console.log("DataBase Conntected Successfully");
    }).catch((err)=>{
     console.log("Error in DB")
@@ -19,7 +20,7 @@ mongoose.connect(URLdb, {useNewUrlParser : true ,
 
 const userRoute = require("./Router/UserRoute");
 const restuarantRoute = require("./Router/restuarantRoute");
-const fooditemRoute = require("./Router/foodItemRoute");
+const fooditemRoute = require("./Router/fooditemRouter");
 
 app.use("/image", express.static(__dirname + "/content"));
 
